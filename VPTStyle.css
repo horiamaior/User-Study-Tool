@@ -1,0 +1,25 @@
+body, html{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	
+	margin: 0; padding: 0; border: 0;
+}
+
+#game_table {
+	min-width: 60%;
+	margin: 10px auto;
+	border-collapse: collapse;
+}
+
+#game_table div {
+	border: 1px solid #000;
+	width: auto;
+	height: 150px;
+	cursor: pointer;
+}
+th, td {
+    padding: 1;
+}
+.blackCell{
+	 background-color: #000;
+}
+

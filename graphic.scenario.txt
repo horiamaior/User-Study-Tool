@@ -1,0 +1,42 @@
+start
+background white
+displayGr first 6 5
+background black
+wait 15
+background white
+displayGr second 6 5
+background black
+wait 15
+background white
+displayGr third 6 5
+background black
+wait 15
+background white
+displayGr fourth 6 5
+background black
+wait 15
+background white
+displayGr fifth 6 5
+background black
+wait 15
+background white
+displayGr sixth 6 5
+background black
+wait 15
+background white
+displayGr seventh 6 5
+background black
+wait 15
+background white
+displayGr eight 6 5
+background black
+wait 15
+background white
+displayGr nineth 6 5
+background black
+wait 15
+background white
+displayGr tenth 6 5
+background black
+wait 15
+end

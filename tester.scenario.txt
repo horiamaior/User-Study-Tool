@@ -1,0 +1,82 @@
+start
+backgroung black
+wait 15
+background white
+displayNr first 1000000 9999999
+wait 4
+background white
+wait 15
+input first 7
+backgroung black
+wait 15
+background white
+displayNr second 1000000 9999999
+wait 4
+background white
+wait 15
+input second 7
+backgroung black
+wait 15
+background white
+displayNr third 1000000 9999999
+wait 4
+background white
+wait 15
+input third 7
+backgroung black
+wait 15
+background white
+displayNr fourth 1000000 9999999
+wait 4
+background white
+wait 15
+input fourth 7
+backgroung black
+wait 15
+background white
+displayNr fifth 1000000 9999999
+wait 4
+background white
+wait 15
+input fith 7
+backgroung black
+wait 15
+background white
+displayNr sixth 1000000 9999999
+wait 4
+background white
+wait 15
+input sixth 7
+backgroung black
+wait 15
+background white
+displayNr seventh 1000000 9999999
+wait 4
+background white
+wait 15
+input seventh 7
+backgroung black
+wait 15
+background white
+displayNr eighth 1000000 9999999
+wait 4
+background white
+wait 15
+input eighth 7
+backgroung black
+wait 15
+background white
+displayNr nineth 1000000 9999999
+wait 4
+background white
+wait 15
+input nineth 7
+backgroung black
+wait 15
+background white
+displayNr tenth 1000000 9999999
+wait 4
+background white
+wait 15
+input tenth 7
+end
