@@ -5,6 +5,7 @@ var UNDEFINED = "UNDEFINED";
 var BLACK_CELL_CLASS = "blackCell";
 
 var COGNITIVE_REST_PERIOD = 15000; //Force the user to memorise the grid for 15 seconds
+var INBETWEEN_TRIAL_REST_PERIOD = 15000;
 var NUMBER_DISPLAY_PERIOD = 4000; //Show the grid for 4 seconds.
 var vpt;
 
@@ -189,7 +190,16 @@ VPT.prototype.endGame = function ()
     $('#submitButton').remove();
     this._mode = VIEW_MODE;
     this.reset();
-    this.showPattern();
+    
+    setTimeout(
+		function ()
+		{
+            vpt.showPattern();
+		},
+		INBETWEEN_TRIAL_REST_PERIOD);
+        
+
+    
 }
 VPT.prototype.scoreUserInput = function ()
 {

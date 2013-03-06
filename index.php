@@ -240,20 +240,21 @@ if(!isset($_REQUEST['exp'])) {
 
 
 
+<center>
+    <table id="game_table">
+		<tbody>
+			<tr><td align="center"></td></tr>
+		</tbody>
+	</table>
+	<div id="submitButtonHere"></div>
+</center>
+
 <?php
 
 //end
 writeData($data);
 ?>
 
-<center>
-	<table id="game_table">
-		<tbody>
-			<tr><td align="center"></td>wtf</tr>
-		</tbody>
-	</table>
-	<div id="submitButtonHere"></div>
-</center>
 </body>
 
 
