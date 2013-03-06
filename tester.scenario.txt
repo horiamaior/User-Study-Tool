@@ -3,11 +3,6 @@ background black
 wait 15
 background white
 displayGr first 6 5
-wait 4
-background white
-wait 15
-input first 7
-background black
 wait 15
 background white
 displayNr second 1000000 9999999
@@ -15,22 +10,11 @@ wait 4
 background white
 wait 15
 input second 7
-background black
 wait 15
 background white
-displayNr third 1000000 9999999
-wait 4
-background white
-wait 15
-input third 7
-background black
+displayGr first 6 5
 wait 15
 background white
-displayNr fourth 1000000 9999999
-wait 4
-background white
-wait 15
-input fourth 7
 background black
 wait 15
 background white

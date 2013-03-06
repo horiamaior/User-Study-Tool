@@ -180,6 +180,7 @@ VPT.prototype.showPattern = function ()
 VPT.prototype.startGame = function ()
 {
     console.log("Starting Game");
+    this._canvas.show();
     this._mode = VIEW_MODE;
     this.reset();
     this.showPattern();
@@ -189,14 +190,16 @@ VPT.prototype.endGame = function ()
     console.log("Ending Game");
     $('#submitButton').remove();
     this._mode = VIEW_MODE;
-    this.reset();
+    this._canvas.hide();
+    next();
+  //  this.reset();
     
-    setTimeout(
-		function ()
-		{
-            vpt.showPattern();
-		},
-		INBETWEEN_TRIAL_REST_PERIOD);
+//    setTimeout(
+//		function ()
+//		{
+//            vpt.showPattern();
+//		},
+//		INBETWEEN_TRIAL_REST_PERIOD);
         
 
     
