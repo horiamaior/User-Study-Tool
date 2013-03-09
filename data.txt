@@ -1,1 +1,1 @@
-{"experiments":["tester"]}
+{"experiments":["tester","artefact","nonartefact"]}

@@ -11,18 +11,6 @@ if(isset($_REQUEST['exp_real'])) {
 	exit;
 }
 
-if(isset($_REQUEST['exp_gr'])) {
-	$exp = new Experiment($_REQUEST['exp']);
-	$ddata = $exp->getData();
-	$f = fopen("results.txt", 'a');
-	fwrite($f, $ddata . PHP_EOL);
-	fclose($f);
-	header("Location: index.php");
-	exit;
-}
-
-
-
 
 function getData() {
 	return json_decode(file_get_contents("data.txt") , true);
@@ -68,6 +56,7 @@ class Experiment {
 		unset($post['sbj']);
 		$d['subject'] = $_REQUEST['sbj'];
 		$d['experiment'] = $_REQUEST['exp'];
+		$d['time'] = time();
 		foreach($post as $key=>$val) {
 			if(strpos($key, "_nr") === false) {
 				$d['data'][$key]['original'] = $_REQUEST[$key.'_nr'];
@@ -108,110 +97,87 @@ function next(nc) {
 	
 	if(!nc) {
 		var inputs = document.getElementsByTagName("input");
+		//console.log(inputs);
 		for(var i in inputs) {
-			inputs[0].style.display = 'none';
+			//console.log(i);
+			//console.log(inputs[i]);
+			//console.log(inputs[i].style);
+			//console.log('========================================');
+			if(inputs[i].style) {
+				inputs[i].style.display = 'none';
+			}
 		}
 		document.getElementById('text').innerHTML = '';
 	}
 	
 	idx++;
-	console.log("NEXT :: "+idx);
-	
-		if(actions[idx][0] == "wait") {
-			EXP_wait(actions[idx][1]);
-		} else if(actions[idx][0] == "background") {
-			EXP_background(actions[idx][1]);
-		} else if(actions[idx][0] == "displayNr") {
-			EXP_displayNr(actions[idx][1], actions[idx][2], actions[idx][3]);
-		} else if(actions[idx][0] == "displayGr"){
-			EXP_displayGr(actions[idx][1], actions[idx][2], actions[idx][3]);
-		} else if(actions[idx][0] == "input") {
-			EXP_input(actions[idx][1], actions[idx][2]);
-		} else if(actions[idx][0] == "start") {
-			EXP_start();
-		} else if(actions[idx][0] == "end") {
-			EXP_end();
-		} else {
-			console.log("NEXT :: ERROR :: "+actions[idx][0]);
-		}
-	
+	//console.log("NEXT :: "+idx);
+	if(actions[idx][0] == "wait") {
+		EXP_wait(actions[idx][1]);
+	} else if(actions[idx][0] == "background") {
+		EXP_background(actions[idx][1]);
+	} else if(actions[idx][0] == "displayNr") {
+		EXP_displayNr(actions[idx][1], actions[idx][2], actions[idx][3]);
+	} else if(actions[idx][0] == "input") {
+		EXP_input(actions[idx][1], actions[idx][2]);
+	} else if(actions[idx][0] == "start") {
+		EXP_start();
+	} else if(actions[idx][0] == "end") {
+		EXP_end();
+	} else {
+		//console.log("NEXT :: ERROR :: "+actions[idx][0]);
+	}
 }
 
 //actions
 function EXP_wait(time) {
-	console.log("WAIT :: "+time);
+	//console.log("WAIT :: "+time);
 	setTimeout("next(false)", time*1000);
 }
 
 function EXP_background(color) {
-	console.log("BACKGROUND :: "+color);
+	//console.log("BACKGROUND :: "+color);
 	document.getElementById('body').style.backgroundColor = color;
 	next(false);
 }
 
 function EXP_displayNr(name, min, max) {
-	console.log("DISPLAY :: "+name+" - "+min+" - "+max);
+	//console.log("DISPLAY :: "+name+" - "+min+" - "+max);
 	var r = parseInt(Math.random() * (max-min));
 	r = parseInt(r) + parseInt(min);
 	document.getElementById('text').innerHTML = r;
-	console.log("DISPLAY :: "+r);
+	//console.log("DISPLAY :: "+r);
 	var inp = "<input type='hidden' name='"+name+"_nr' value='"+r+"' />";
-	var now = document.getElementById('data').innerHTML;
-	document.getElementById('data').innerHTML = now + inp;
+	var now = document.getElementById('data').innerHTML += inp;
 	next(true);
 }
 
-function EXP_displayGr(name, n, m) {
-
-	
-    // var js = '<script>console.log("Pattern-Display");';
-	// js += 'var canvas = $("#game_table tbody");';
-	// js += 'var Game = new VPT(canvas, 4, 4);';
-	// js += 'canvas.data("VPT", Game);';
-	// js += 'vpt = $("#game_table tbody").data("VPT");';
-	// js += 'Game.startGame();';
-	
-	console.log("EXP_displayGr");
-    var canvas = $("#game_table tbody");
-    var Game = new VPT(canvas, n, m);
-    canvas.data('VPT', Game);
-    vpt = $('#game_table tbody').data('VPT');
-    Game.startGame();
-	
-	// var now = document.getElementById('data').innerHTML;
-	// document.getElementById('data').innerHTML = now + js;
-	// next(true);
-}
-
 function EXP_input(name, len) {
-	console.log("INPUT :: "+name+" - "+len);
-	var inp = "<input type='number' maxlength="+len+" size="+len+" name='"+name+"' style='font-size: 125px' />";
-	var smt = "<input type='submit' value='Done' onclick='return dummySmt();' />";
+	//console.log("INPUT :: "+name+" - "+len);
+	var inp = "<input type='number' maxlength="+len+" size="+len+" id='elem_"+name+"' style='font-size: 80px' />";
+	var smt = "<input type='submit' value='Done' onclick='return dummySmt(\""+name+"\");' />";
 	var now = document.getElementById('data').innerHTML;
 	document.getElementById('data').innerHTML = now + inp + smt;
 }
 
 function EXP_start() {
-
-	console.log("START");
+	//console.log("START");
 	next(false);
 }
 
 function EXP_end() {
-	console.log("END");
+	//console.log("END");
 	document.getElementById('exp_form').submit();
 }
 
-function dummySmt() {
-	document.getElementById("data").innerHTML = "";
+function dummySmt(name) {
+	var inp = "<input type='hidden' name='"+name+"' value='"+document.getElementById('elem_'+name).value+"' />";
+	var now = document.getElementById('data').innerHTML += inp;
 	next(false);
 	return false;
 }
 </script>
 </head>
-<script src = "VPT.js"></script>
-<script src = "jquery.js"></script>
-<link rel="stylesheet" type="text/css" href="VPTStyle.css">
 <body id='body' style='width: 100%' onload="next(true)">
 <form id='exp_form'>
 <?php
@@ -229,33 +195,20 @@ if(isset($_REQUEST['exp'])) {
 if(!isset($_REQUEST['exp'])) {
 	echo "<input type='text' name='sbj' style='font-size: 35px' /><br /><select name='exp' style='font-size: 35px'>";
 	echo selOpExp();
-	echo "</select><br /><input type='submit' value='Start' />";
+	echo "</select><br /><input type='submit' value='Start'  style='font-size: 35px/>";
 }
 ?>
 </div>
 </form>
 <br />
-<div id='text' style='width: 400px; margin: auto; text-align: center; font-size: 125px; '>
+<div id='text' unselectable="on" style='width: 400px; margin: auto; text-align: center; font-size: 80px;' >
 </div>
 
-
-
-<center>
-    <table id="game_table">
-		<tbody>
-			<tr><td align="center"></td></tr>
-		</tbody>
-	</table>
-	<div id="submitButtonHere"></div>
-</center>
 
 <?php
 
 //end
 writeData($data);
 ?>
-
 </body>
-
-
 </html>

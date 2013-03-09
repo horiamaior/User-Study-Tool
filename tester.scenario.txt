@@ -1,66 +1,14 @@
 start
-background black
-wait 15
 background white
-displayGr first 6 5
-wait 15
+displayNr first 1000000 9999999
+wait 4
+background white
+wait 2
+input first 7
 background white
 displayNr second 1000000 9999999
 wait 4
 background white
-wait 15
+wait 2
 input second 7
-wait 15
-background white
-displayGr first 6 5
-wait 15
-background white
-background black
-wait 15
-background white
-displayNr fifth 1000000 9999999
-wait 4
-background white
-wait 15
-input fith 7
-background black
-wait 15
-background white
-displayNr sixth 1000000 9999999
-wait 4
-background white
-wait 15
-input sixth 7
-background black
-wait 15
-background white
-displayNr seventh 1000000 9999999
-wait 4
-background white
-wait 15
-input seventh 7
-background black
-wait 15
-background white
-displayNr eighth 1000000 9999999
-wait 4
-background white
-wait 15
-input eighth 7
-background black
-wait 15
-background white
-displayNr nineth 1000000 9999999
-wait 4
-background white
-wait 15
-input nineth 7
-background black
-wait 15
-background white
-displayNr tenth 1000000 9999999
-wait 4
-background white
-wait 15
-input tenth 7
 end
