@@ -3,12 +3,8 @@ background white
 displayNr first 1000000 9999999
 wait 4
 background white
-wait 2
+wait 15
 input first 7
 background white
-displayNr second 1000000 9999999
-wait 4
-background white
-wait 2
-input second 7
+displayGr second 6 5
 end

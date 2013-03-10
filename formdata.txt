@@ -1,0 +1,1 @@
+O:10:"Experiment":1:{s:4:"data";a:6:{i:0;a:1:{i:0;s:5:"start";}i:1;a:2:{i:0;s:10:"background";i:1;s:5:"white";}i:2;a:4:{i:0;s:9:"displayNr";i:1;s:6:"second";i:2;s:7:"1000000";i:3;s:7:"9999999";}i:3;a:2:{i:0;s:4:"wait";i:1;s:1:"4";}i:4;a:3:{i:0;s:5:"input";i:1;s:6:"second";i:2;s:1:"7";}i:5;a:1:{i:0;s:3:"end";}}}

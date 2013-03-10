@@ -8,6 +8,7 @@ if(isset($_REQUEST['exp_real'])) {
 	fwrite($f, $ddata . PHP_EOL);
 	fclose($f);
 	header("Location: index.php");
+
 	exit;
 }
 
@@ -58,9 +59,10 @@ class Experiment {
 		$d['experiment'] = $_REQUEST['exp'];
 		$d['time'] = time();
 		foreach($post as $key=>$val) {
-			if(strpos($key, "_nr") === false) {
+			if(strpos($key, "_nr") === false && strpos($key, "_time") === FALSE) {
 				$d['data'][$key]['original'] = $_REQUEST[$key.'_nr'];
 				$d['data'][$key]['answer'] = $_REQUEST[$key];
+				$d['data'][$key]['time'] = $_REQUEST[$key.'_time'];
 			}
 		}
 		return json_encode($d);
@@ -70,17 +72,48 @@ class Experiment {
 
 <html>
 <head>
+
 <style>
 input, select, textarea {
 	width: 100%;
 }
+    
+    body, html{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	
+	margin: 0; padding: 0; border: 0;
+}
+
+#game_table {
+	min-width: 60%;
+	margin: 10px auto;
+	border-collapse: collapse;
+    margin-top: -100px;
+}
+
+#game_table div {
+	border: 1px solid #000;
+	width: auto;
+	height: 150px;
+	cursor: pointer;
+}
+th, td {
+    padding: 1;
+}
+.blackCell{
+	 background-color: #000;
+}
+
+
 </style>
-<script src="jquery.js" type="text/javascript"></script>
-<script src="VPT.js" type="text/javascript"></script>
+
+<script type='text/javascript' src="jquery.js"></script>
+<script type='text/javascript' src="VPT.js"></script>
 
 <script type='text/javascript'>
     var actions = new Array();
     var idx = -1;
+    var tName = "";
     function start(i) {
         if (i > actions.length) {
 
@@ -96,9 +129,10 @@ input, select, textarea {
     }
     //helpers
     function next(nc) {
+
         if (!nc) {
             var inputs = document.getElementsByTagName("input");
-
+            //console.log(inputs);
             for (var i in inputs) {
                 //console.log(i);
                 //console.log(inputs[i]);
@@ -112,7 +146,7 @@ input, select, textarea {
         }
 
         idx++;
-        console.log("NEXT :: " + idx);
+        //console.log("NEXT :: "+idx);
         if (actions[idx][0] == "wait") {
             EXP_wait(actions[idx][1]);
         } else if (actions[idx][0] == "background") {
@@ -151,18 +185,20 @@ input, select, textarea {
         var now = document.getElementById('data').innerHTML += inp;
         next(true);
     }
-    function EXP_displayGr(name, min, max) {
-        
 
+    function EXP_displayGr(name, x, y) {
         var canvas = $("#game_table tbody");
-        var Game = new VPT(canvas, 4, 4);
+        var Game = new VPT(canvas, x, y);
         canvas.data('VPT', Game);
         vpt = $('#game_table tbody').data('VPT');
         Game.startGame();
-        var inp = "<input type='hidden' name='" + name + "_nr' value='" + r + "' />";
+
+        var inp = "<input type='hidden' name='" + name + "_nr' value='" + Game._tableData + "' />";
         var now = document.getElementById('data').innerHTML += inp;
-        next(true);
+
+        tName = name;
     }
+
     function EXP_input(name, len) {
         //console.log("INPUT :: "+name+" - "+len);
         var inp = "<input type='number' maxlength=" + len + " size=" + len + " id='elem_" + name + "' style='font-size: 80px' />";
@@ -179,7 +215,9 @@ input, select, textarea {
         document.getElementById('exp_form').submit();
     }
     function dummySmt(name) {
+        var myDate = new Date();
         var inp = "<input type='hidden' name='" + name + "' value='" + document.getElementById('elem_' + name).value + "' />";
+        inp += "<input type='hidden' name='"+ name+"_time' value='" + myDate.getTime() + "' />";
         var now = document.getElementById('data').innerHTML += inp;
         next(false);
         return false;
@@ -187,15 +225,6 @@ input, select, textarea {
 </script>
 </head>
 <body id='body' style='width: 100%' onload="next(true)">
-
-<center>
-	<table id="game_table">
-		<tbody>
-			<tr><td align="center">WAT Javascript?</td></tr>
-		</tbody>
-	</table>
-	<div id="submitButtonHere"></div>
-</center>
 
 <form id='exp_form'>
 <?php
@@ -228,5 +257,14 @@ if(!isset($_REQUEST['exp'])) {
 //end
 writeData($data);
 ?>
+
+    <center>
+	<table id="game_table">
+		<tbody>
+			<tr><td align="center"></td></tr>
+		</tbody>
+	</table>
+	<div id="submitButtonHere"></div>
+</center>
 </body>
 </html>
