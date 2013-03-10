@@ -94,7 +94,7 @@ input, select, textarea {
 #game_table div {
 	border: 1px solid #000;
 	width: auto;
-	height: 150px;
+	height: 100px;
 	cursor: pointer;
 }
 th, td {
@@ -109,6 +109,21 @@ th, td {
 
 <script type='text/javascript' src="jquery.js"></script>
 <script type='text/javascript' src="VPT.js"></script>
+
+<script type="text/javascript">
+
+function killCopy(e){
+return false
+}
+function reEnable(){
+return true
+}
+document.onselectstart=new Function ("return false")
+if (window.sidebar){
+document.onmousedown=killCopy
+document.onclick=reEnable
+}
+</script>
 
 <script type='text/javascript'>
     var actions = new Array();
