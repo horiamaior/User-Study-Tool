@@ -261,7 +261,7 @@ $(document).bind("keydown", disableKeys);
 
     function EXP_input(name, len) {
         //console.log("INPUT :: "+name+" - "+len);
-        var inp = "<input type='number' maxlength=" + len + " size=" + len + " id='elem_" + name + "' style='font-size: 80px' />";
+        var inp = "<input type='text' maxlength=" + len + " size=" + len + " id='elem_" + name + "' style='font-size: 80px' />";
         var smt = "<input type='submit' value='Done' onclick='return dummySmt(\"" + name + "\");' />";
         var now = document.getElementById('data').innerHTML;
         document.getElementById('data').innerHTML = now + inp + smt;
@@ -300,7 +300,7 @@ if(isset($_REQUEST['exp'])) {
 <div id='data' style='width: 400px; margin: auto;'>
 <?php
 if(!isset($_REQUEST['exp'])) {
-	echo "<input type='text' name='sbj' style='font-size: 35px' /><br /><select name='exp' style='font-size: 35px'>";
+	echo "<input type='text' name='sbj' style='font-size: 35px'/><br /><select name='exp' style='font-size: 35px'>";
 	echo selOpExp();
 	echo "</select><br /><input type='submit' value='Start' id='StartExperimentButton' style='font-size: 35px'/>";
 }
