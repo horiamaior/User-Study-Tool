@@ -135,7 +135,7 @@ function disableKeys(e)
     {
         e.preventDefault();
         ctrl = false;
-        console.log("Ctrl");    }
+    }
     else
     {
         switch(key)
@@ -164,7 +164,6 @@ $(document).bind("keydown", disableKeys);
 
     function StartOfExperiment()
     {
-        console.log("brap");
         var myDate = new Date();
         var inp = "<input type='hidden' name='"+ tName+"StartOfExperimentTime' value='" + myDate.getTime() + "' />";
         var now = document.getElementById('data').innerHTML += inp;
