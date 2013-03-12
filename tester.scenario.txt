@@ -3,7 +3,7 @@ background white
 displayNr first 1000000 9999999
 wait 4
 background white
-wait 15
+wait 5
 input first 7
 background white
 displayGr second 6 5

@@ -123,9 +123,48 @@ if (window.sidebar){
 document.onmousedown=killCopy
 document.onclick=reEnable
 }
+
+var ctrl = false;
+function disableKeys(e) 
+{ 
+    var key = e.which;
+
+    if (ctrl) 
+    {
+        e.preventDefault();
+        ctrl = false;
+        console.log("Ctrl");    }
+    else
+    {
+        switch(key)
+        {
+            case 116: //F5
+            case 112: //F11
+            case 123: //F12
+            e.preventDefault();
+        }
+
+        if (key === 17) 
+        {
+            ctrl = true;
+        };
+    }
+};
+
+$(document).bind("keydown", disableKeys);
 </script>
 
 <script type='text/javascript'>
+
+    function StartOfExperiment()
+    {
+        console.log("brap");
+        var myDate = new Date();
+        inp += "<input type='hidden' name='"+ tName+"StartOfExperimentTime' value='" + myDate.getTime() + "' />";
+        var now = document.getElementById('data').innerHTML += inp;
+    }
+
+
     var actions = new Array();
     var idx = -1;
     var tName = "";
@@ -257,7 +296,7 @@ if(isset($_REQUEST['exp'])) {
 if(!isset($_REQUEST['exp'])) {
 	echo "<input type='text' name='sbj' style='font-size: 35px' /><br /><select name='exp' style='font-size: 35px'>";
 	echo selOpExp();
-	echo "</select><br /><input type='submit' value='Start'  style='font-size: 35px/>";
+	echo "</select><br /><input type='submit' value='Start'  style='font-size: 35px' onclick='console.log('test');'/>";
 }
 ?>
 </div>
