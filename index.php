@@ -54,10 +54,12 @@ class Experiment {
 		$post = $_REQUEST;
 		unset($post['exp_real']);
 		unset($post['exp']);
-		unset($post['sbj']);
+        unset($post['sbj']);
+        unset($post['StartOfExperimentTime']);
 		$d['subject'] = $_REQUEST['sbj'];
 		$d['experiment'] = $_REQUEST['exp'];
-		$d['time'] = time();
+        $d['startTime'] = $_REQUEST['StartOfExperimentTime'];
+		$d['endTime'] = time();
 		foreach($post as $key=>$val) {
 			if(strpos($key, "_nr") === false && strpos($key, "_time") === FALSE) {
 				$d['data'][$key]['original'] = $_REQUEST[$key.'_nr'];
@@ -156,11 +158,15 @@ $(document).bind("keydown", disableKeys);
 
 <script type='text/javascript'>
 
+    $(document).ready(function (argument) {
+        $("#StartExperimentButton").click(StartOfExperiment());
+    })
+
     function StartOfExperiment()
     {
         console.log("brap");
         var myDate = new Date();
-        inp += "<input type='hidden' name='"+ tName+"StartOfExperimentTime' value='" + myDate.getTime() + "' />";
+        var inp = "<input type='hidden' name='"+ tName+"StartOfExperimentTime' value='" + myDate.getTime() + "' />";
         var now = document.getElementById('data').innerHTML += inp;
     }
 
@@ -296,7 +302,7 @@ if(isset($_REQUEST['exp'])) {
 if(!isset($_REQUEST['exp'])) {
 	echo "<input type='text' name='sbj' style='font-size: 35px' /><br /><select name='exp' style='font-size: 35px'>";
 	echo selOpExp();
-	echo "</select><br /><input type='submit' value='Start'  style='font-size: 35px' onclick='console.log('test');'/>";
+	echo "</select><br /><input type='submit' value='Start' id='StartExperimentButton' style='font-size: 35px'/>";
 }
 ?>
 </div>
